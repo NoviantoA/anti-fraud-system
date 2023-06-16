@@ -1,0 +1,2 @@
+# Spring-Anti-Fraud-System
+Project ini mendemonstrasikan prinsip-prinsip dari anti-fraud-system di sektor keuangan. Project ini akan bekerja pada sistem dengan model role yang sederhana, serangkaian REST endpoints yang berfungsi untuk berinteraksi kepada pengguna, dan logika validasi transaksi internal berdasarkan aturan heuristic.
