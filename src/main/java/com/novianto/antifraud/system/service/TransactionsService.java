@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Service
 @SuppressWarnings("unused")
-public class TransactionService {
+public class TransactionsService {
 
     @Autowired
     private CardRepository cardRepository;
@@ -31,9 +31,6 @@ public class TransactionService {
 
     /**
      * Memproses transaksi dengan memvalidasi nomor kartu dan alamat ip.
-     *
-     * @param transaction Transaction object untuk diproses
-     * @return Map dengan hasil dan informasi transaksi
      */
     public Map<String, String> processTransaction(Transaction transaction){
         Long amount = transaction.getAmount();
@@ -62,8 +59,6 @@ public class TransactionService {
 
     /**
      * Helper method untuk menyimpan card di database jika tidak ada.
-     *
-     * @param cardNumber card number akan diperiksa dan disimpan
      */
     private void saveCardIfNotExists(String cardNumber){
         if (cardRepository.findByNumber(cardNumber).isEmpty()){
@@ -73,10 +68,6 @@ public class TransactionService {
 
     /**
      * Provide feedback untuk transaksi mencurigakan.
-     *
-     * @param transactionId Id dari transaksi yang akan diperiksa
-     * @param feedback Feedback yang akan diberikan
-     * @return Objek transaksi dengan feedback yang diberikan
      */
 
     public Transaction updateTransaction(long transactionId, String feedback){
@@ -100,9 +91,6 @@ public class TransactionService {
 
     /**
      * Method Helper untuk mengubah batas transaksi tertentu berdasarkan umpan balik yang diberikan.
-     *
-     * @param transaction Transaction yang akan diperiksa
-     * @param feedback Feedback yang akan diberikan
      */
     private void changeLimit(Transaction transaction, String feedback){
         String transactionResult = transaction.getResult();
@@ -138,9 +126,6 @@ public class TransactionService {
 
     /**
      * Return transaction history untuk nomor kartu yang diberikan
-     *
-     * @paramcardNumber cardNumber yang akan diperiksa
-     * @return List transaction history untuk nomor kartu yang diberikan
      */
     public List<Transaction> getTransactionHistory(String cardNumber){
         if (CardValidator.isNonValid(cardNumber)) throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
